@@ -17,7 +17,7 @@ foo(10);
 
 
 
-// Types personnalisés
+// Types personnalisés - Alias
 type mixedNumStr = string | number;
 type booleanOrObject = boolean | object;
 
