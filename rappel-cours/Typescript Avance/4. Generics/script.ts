@@ -1,4 +1,4 @@
-// Generics => paramètres réutilisable avec les interfaces et les fonctions
+// Generics => paramètres réutilisable dans les types, interfaces et fonctions
 
 // Interface réutilisable
 interface City <T> {
@@ -38,10 +38,12 @@ const Tokyo : City<object []> = {
 console.table([Tokyo, Paris, Londres])
 
 
-// Fonctions
-// Ici le type object est trop vaste
-// const addRepairDate = (obj: object) => {
 
+
+// Fonctions
+// Ici le type object est trop vaste. On ne peut ni spécifier sa longueur, ni les types qu'il va contenir
+// const addRepairDate = (obj: object) => {
+// Donc on définit un Generics qui pour l'instant va accepter tous les types
 const addRepairDate = <G> (obj: G) => {
   const lastRepair = new Date()
 
@@ -63,5 +65,45 @@ const addRepairDate2 = <G extends object> (obj: G) => {
 
   return {...obj, lastRepair}
 }
-// const auto4 = addRepairDate2("TEST")
 const auto5 = addRepairDate2({model: "Ford", year: 2018, color: "white"})
+// const auto4 = addRepairDate2("TEST")
+
+
+// 2nd exemple : 
+function identity1 <Type> (arg: Type): Type {
+  return arg
+}
+// Ici le type est défini lors de la création de l'objet
+const aa = identity1(4)
+
+// Et on peut restreindre le paramètre à un type précis avec extends. 
+// De plus le type en sortie sera le même que celui en paramètre
+function identity2 <Type extends number> (arg: Type): Type {
+  return arg
+}
+
+
+
+
+
+
+// Pour obliger à fournir un paramètre ayant la propriété length
+function consoleSize <T extends {length:number}> (arg: T) : T {
+  console.log(arg.length);
+  return arg
+}
+
+// const str = consoleSize(4);
+const str2 = consoleSize([1,2,3]);
+
+
+
+// On peut également extraire un type à partir d'une constante.
+// Déconseillé car si on change user le type change et peut engendre des erreurs si on a utiliser le type autre part.
+const user = {
+  firstname: "John",
+  lastname: "Doe",
+  age: 20
+}
+
+type User = typeof user;

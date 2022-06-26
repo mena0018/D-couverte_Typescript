@@ -28,8 +28,9 @@ const Tokyo = {
 };
 console.table([Tokyo, Paris, Londres]);
 // Fonctions
-// Ici le type object est trop vaste
+// Ici le type object est trop vaste. On ne peut ni spécifier sa longueur, ni les types qu'il va contenir
 // const addRepairDate = (obj: object) => {
+// Donc on définit un Generics qui pour l'instant va accepter tous les types
 const addRepairDate = (obj) => {
     const lastRepair = new Date();
     return Object.assign(Object.assign({}, obj), { lastRepair });
@@ -45,5 +46,19 @@ const addRepairDate2 = (obj) => {
     const lastRepair = new Date();
     return Object.assign(Object.assign({}, obj), { lastRepair });
 };
-// const auto4 = addRepairDate2("TEST")
 const auto5 = addRepairDate2({ model: "Ford", year: 2018, color: "white" });
+// const auto4 = addRepairDate2("TEST")
+// Pour obliger à fournir un paramètre ayant la propriété length
+function consoleSize(arg) {
+    console.log(arg.length);
+    return arg;
+}
+// const str = consoleSize(4);
+const str2 = consoleSize([1, 2, 3]);
+// On peut également extraire un type à partir d'une constante.
+// Déconseillé car si on change user le type change et peut engendre des erreurs si on a utiliser le type autre part.
+const user = {
+    firstname: "John",
+    lastname: "Doe",
+    age: 20
+};
