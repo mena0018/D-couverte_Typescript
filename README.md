@@ -1,6 +1,7 @@
 # 1) Rappel cours :
-* Les bases de TypeScript
-* TypeScript Avancé
+* I) Les bases de TypeScript
+* II) TypeScript Avancé
+* III) Les classes
 
 <br>
 
