@@ -6,3 +6,4 @@
 <br>
 
 # 2) Mise en pratique 
+* Mise en pratique de TypeScript avec React
